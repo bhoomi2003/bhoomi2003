@@ -1,48 +1,53 @@
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
 int main()
 {
-float a,b,c,desc,r1,r2,realpart,imgpart;
-printf("Enter the coefficients of a, b and c :");
-scanf("%f%f%f",&a,&b,&c);
-if(a==0)
+float unit,total,charge;
+char name[20];
+// Accept Customer's name
+printf("Enter the name : ");
+gets(name);
+// Accept No. of units consumed
+printf("Enter the units : ");
+scanf("%f",&unit);
+charge=0;
+if(unit>=1&&unit<=200) // Charge 80 paise per unit for the first 200 units
 {
-printf("Coefficient of a cannot be zero....\n");
-printf("Please try again....\n");
-return 1;
+charge=0.8 * unit;
 }
-desc=(b*b)-(4.0*a*c);
-if(desc==0)
+else if(unit>=201&&unit<=300) // Charge 80 paise per unit for the first 200 units and
+{ // 90 paise per unit for the next 100 units
+charge = 0.8*(200) + 0.9*(unit-200);
+}
+else if (unit > 300) //Charge 80 paise per unit for the first 200 units,
+{ // 90 paise per unit for the next 100 units and
+// one rupee per unit for all units above 300
+charge = 0.8*(200) + 0.9*(100) + 1*(unit-300);
+
+}
+total=charge+100; // Add Meter charge of Rs. 100
+if(total>400)
 {
-printf("The roots are real and equal\n");
-r1=r2=(-b)/(2.0*a);
-printf("The two roots are r1=r2=%f\n",r1);
+total = total + (0.15*total); // Add additional surcharge of 15 percent of total amount
 }
-else if(desc>0)
-{
-printf("The roots are real and distinct\n");
-r1=(-b+sqrt(desc))/(2.0*a);
-r2=(-b-sqrt(desc))/(2.0*a);
-printf("The roots are r1=%f and r2=%f\n",r1,r2);
-}
-else
-{
-printf("The roots are imaginary\n");
-realpart=(-b)/(2.0*a);
-imgpart=sqrt(-desc)/(2.0*a);
-printf("The roots are r1=%f + i %f\n",realpart,imgpart);
-printf("r2=%f - i %f\n",realpart,imgpart);
-}
+// Display the electricity bill
+printf("\n\nELECTRICITY BILL\n");
+printf("----------------\n");
+printf("\nName : %s\n",name);
+printf("No. of units: %.2f\n",unit);
+printf("Total Bill Amount: Rs. %.2f\n",total);
+Computer Programming Laboratory – 21CPL17/27 Academic Year: 2021-22
+Department of Computer Science & Engineering, CMRIT, Bangalore
+printf("----------------\n");
 return 0;
 }
-
-SAMPLE OUTPUT:
-cc Prog2.c -lm
-./a.out
-Enter the coefficients of a, b and c :1 2 1
-The roots are real and equal
-The two roots are r1=r2=-1.000000
-./a.out
-Enter the coefficients of a, b and c :1 -2 1
-The roots are real and equal
-The two roots are r1=r2=1.000000
+SAMPLE OUTPUTS:
+1.
+$ cc prog3.c
+$ ./a.out
+Enter the name : Anitha
+Enter the units : 0
+ELECTRICITY BILL
+----------------
+Name : Anitha
+No. of units: 0.00
+Total Bill Amount: Rs. 100.00
