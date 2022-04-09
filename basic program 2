@@ -1,0 +1,12 @@
+// c program to print "HELLO CMRIT"
+#include<stdio.h>
+int main()
+{
+  printf("HELLO CMRIT");
+  RETURN 0;
+}
+
+OUTPUT
+CC msin.c
+./a.out
+HELLO CMRIT
